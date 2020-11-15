@@ -1,14 +1,30 @@
 @@startuml
-    actor customer
-    participant atm 
-    participant consortium 
-    participant bank 
+    actor customer #OrangeRed
+    participant atm #red
+    participant consortium #Blue
+    participant bank #WhiteSmoke
 
-    customer -> atm: insert card
-    atm -> consortium: verify card
-    consortium -> bank: verify account
-    bank -> consortium: Account not ok
-    consortium -> atm: reject card
-    atm -> customer: eject card
+
+    customer -> atm ++ : insert card
+
+    atm -> consortium : verify card
+
+    activate consortium
+    
+    consortium -> bank : verify account
+
+    activate bank
+
+    bank --> consortium: Account not ok 
+
+    deactivate bank
+
+    consortium --> atm: reject card
+
+    deactivate consortium
+
+    atm --> customer: eject card 
+
+    deactivate atm   
 
 @@enduml
