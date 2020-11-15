@@ -1,0 +1,14 @@
+@@startuml
+    actor customer
+    participant atm 
+    participant consortium 
+    participant bank 
+
+    customer -> atm: insert card
+    atm -> consortium: verify card
+    consortium -> bank: verify account
+    bank -> consortium: Account not ok
+    consortium -> atm: reject card
+    atm -> customer: eject card
+
+@@enduml
